@@ -31,14 +31,14 @@ function sort_tools_by_hardness()
 end
 
 function Material:new(name, head, tool_rod, extra)
-    local instance = {} -- Vytvorenie novej inštancie ako prázdna tabuľka
-    setmetatable(instance, self) -- Nastavenie metatabule pre inštanciu
-    self.__index = self -- Definovanie dedičstva metód
+    local instance = {} -- Vytvorenie novej in?tancie ako prázdna tabu?ka
+    setmetatable(instance, self) -- Nastavenie metatabule pre in?tanciu
+    self.__index = self -- Definovanie dedi?stva metód
     instance.name = name
     instance.head = head
     instance.tool_rod = tool_rod 
     instance.extra = extra 
-    return instance -- Vrátenie novej inštancie
+    return instance -- Vrátenie novej in?tancie
 end
 
 function Material:show()
@@ -82,7 +82,7 @@ function Material_load(folder)
     local control = true -- Zapne kontrolu whitelistu
     local matfolder = folder.."/materials" -- Cesta k foldru s materialmi
     if not fs.exists(folder.."/whitelist.lua") then
-        local file = fs.open(fileName, "w")
+        local file = fs.open(folder.."/whitelist.lua", "w")
         file.close()
     end
     if not fs.exists(folder.."/blacklist.lua") then
