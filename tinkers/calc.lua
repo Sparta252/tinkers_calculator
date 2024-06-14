@@ -81,6 +81,14 @@ function Material_load(folder)
     folder = folder or "tinkers" -- Ak nie je zadana hodnota, tak sa nastavi "tinkers"
     local control = true -- Zapne kontrolu whitelistu
     local matfolder = folder.."/materials" -- Cesta k foldru s materialmi
+    if not fs.exists(folder.."/whitelist.lua") then
+        local file = fs.open(fileName, "w")
+        file.close()
+    end
+    if not fs.exists(folder.."/blacklist.lua") then
+        local file = fs.open(folder.."/blacklist.lua", "w")
+        file.close()
+    end
     local whitefile = fs.open(folder.."/whitelist.lua", "r")
     local blackfile = fs.open(folder.."/blacklist.lua", "r")
     -- local whitelist = whitefile.readAll()
@@ -89,6 +97,9 @@ function Material_load(folder)
     local blacklist = {}
     readList(whitefile, whitelist)
     readList(blackfile, blacklist)
+    if not fs.exists(matfolder) then
+        fs.makeDir(matfolder)
+    end
     local materials = fs.list(matfolder); -- Zoznam materialov v priecinku
     if #whitelist == 0 then
         control = false
