@@ -318,6 +318,9 @@ local function calculate(size, atribute, type_of_tool)
 
                 if type_of_tool == "pickaxe" or type_of_tool == "shovel" or type_of_tool == "axe" or type_of_tool == "sword" then
                     local setdamage = head.head.attack
+                    if extra.extra.special == "Fractured" or tool.tool_rod.special == "Fractured" then
+                        setdamage = setdamage + 1.5
+                    end
                     local setspeed = head.head.miningSpeed
                     if type_of_tool == "shovel" then
                         setdamage = setdamage*0.9
@@ -341,6 +344,9 @@ local function calculate(size, atribute, type_of_tool)
                 elseif type_of_tool == "hammer" then
                     local setspeed = (head.head.miningSpeed*2 + extra.head.miningSpeed*2)*0.1
                     local setdamage = ((head.head.attack*2 + extra.head.attack*2)/4)*1.2+1
+                    if tool.tool_rod.special == "Fractured" then
+                        setdamage = setdamage + (1.5*1.2)
+                    end
                     newTool = {
                         durability = hardness,
                         speed = setspeed,
