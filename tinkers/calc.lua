@@ -382,7 +382,7 @@ local function calculate(size, atribute, type_of_tool)
     end
 end
 
-local function write_results(folder, type_of_tool)
+local function write_results(folder, type_of_tool, param)
     folder = folder or "tinkers"
     local location = folder.."/results.lua"
     if fs.exists(location) then
@@ -394,6 +394,8 @@ local function write_results(folder, type_of_tool)
     if MAX_COUNT > #Tool_list then
         MAX_COUNT = #Tool_list 
     end
+    file.writeLine("-- Tool: "..type_of_tool.."   parameter: "..param)
+    file.writeLine("--------------------------------------------------")
     for i=1, MAX_COUNT do
         file.writeLine(i..". Durability: ".. Tool_list[i].durability .. "   Speed: ".. Tool_list[i].speed.. "   M_level: ".. Tool_list[i].mininglevel)
         file.writeLine("    Attack: ".. Tool_list[i].attack .. "   Special: ".. Tool_list[i].special[1]..", ".. Tool_list[i].special[2]..", ".. Tool_list[i].special[3])
@@ -483,7 +485,7 @@ Material_load();
 best_parts(MAX_SIZE, param, type_of_tool)
 calculate(MAX_SIZE, param, type_of_tool)
 sort_tools_by_hardness(param, type_of_tool)
-write_results("tinkers", type_of_tool)
+write_results("tinkers", type_of_tool, param)
 print("Hotovo")
 
 
