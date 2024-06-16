@@ -476,7 +476,7 @@ end
 Material_load();
 best_parts(MAX_SIZE, param, type_of_tool)
 calculate(MAX_SIZE, param, type_of_tool);
-sort_tools_by_hardness(param)
+sort_tools_by_hardness(param, type_of_tool)
 write_results("tinkers", type_of_tool)
 print("Hotovo")
 
