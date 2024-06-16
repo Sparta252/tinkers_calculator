@@ -78,11 +78,8 @@ local function formula(atribute, input, type_of_tool)
                 return input.speed
             end
         elseif atribute == "mix" then
-            if input.miningSpeed then
-                return input.durability*input.attack
-            else
-                return input.durability*input.attack
-            end
+            --print(input.durability*input.attack)
+            return input.durability*input.attack
         end
     end
     
@@ -97,8 +94,8 @@ local function tableContains(table, value)
     return false
 end
 
-local function sort_tools_by_hardness(param)
-    table.sort(Tool_list, function(a, b) return formula(param, a) > formula(param, b) end)
+local function sort_tools_by_hardness(param, type_of_tool)
+    table.sort(Tool_list, function(a, b) return formula(param, a, type_of_tool) > formula(param, b, type_of_tool) end)
 end
 
 -- Vytvorenie novej struktury Material
@@ -479,7 +476,6 @@ end
 Material_load();
 best_parts(MAX_SIZE, param, type_of_tool)
 calculate(MAX_SIZE, param, type_of_tool);
-print(#Tool_list)
 sort_tools_by_hardness(param)
 write_results("tinkers", type_of_tool)
 print("Hotovo")
