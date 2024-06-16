@@ -95,7 +95,16 @@ local function tableContains(table, value)
 end
 
 local function sort_tools_by_hardness(param, type_of_tool)
+    for i=1, #Tool_list do
+        print(Tool_list[i].head.." SCORE IS: "..formula(param, Tool_list[i], type_of_tool))
+        sleep(0.2)
+    end
     table.sort(Tool_list, function(a, b) return formula(param, a, type_of_tool) > formula(param, b, type_of_tool) end)
+    print("---------")
+    for i=1, #Tool_list do
+        print(Tool_list[i].head.." SCORE IS: "..formula(param, Tool_list[i], type_of_tool))
+        sleep(0.2)
+    end
 end
 
 -- Vytvorenie novej struktury Material
@@ -349,7 +358,7 @@ local function calculate(size, atribute, type_of_tool)
                         head = head.name,
                         tool_rod = tool.name,
                         extra = extra.name,
-                        special = { head.head.special, extra.extra.special, tool.tool_rod.special }
+                        special = { head.head.special, extra.head.special, tool.tool_rod.special }
                     }
                 end
                 
@@ -475,8 +484,14 @@ end
 
 Material_load();
 best_parts(MAX_SIZE, param, type_of_tool)
-calculate(MAX_SIZE, param, type_of_tool);
+calculate(MAX_SIZE, param, type_of_tool)
+print(type_of_tool)
+print(#Tool_list)
+print(Tool_list[1].head)
+sleep(1)
 sort_tools_by_hardness(param, type_of_tool)
+print(Tool_list[1].head)
+sleep(1)
 write_results("tinkers", type_of_tool)
 print("Hotovo")
 
